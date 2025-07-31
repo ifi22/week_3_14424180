@@ -70,3 +70,5 @@ my_table |>
     axis.line = element_line(color = "black")
   )
 ```
+
+Figure 1 shows that as cylinders increase, engine displacement also increases. This shows that Big Dawgs original statement is false and cars with more cylinders do have bigger engines.
