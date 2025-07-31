@@ -2,9 +2,7 @@
 title: "Week3_Lab_Exercise"
 author: "Isla Fisher"
 date: "31/07/2025"
-output:
-  html_document:
-    df_print: paged
+output: pdf_document
 ---
 
 #Comparison of Cylindar Count to Engine Displacement
@@ -20,15 +18,18 @@ number of cylinders by using linear regression and the tools available on
 R studio.
 
 
+
 Calling the tidyverse package.
 ```{r} 
 library(tidyverse)
 ```
 
+
 Calling mtcars and assigning it to the object mtcars.
 ```{r}
 mtcars <- mtcars
 ```
+
 
 Creating Table 1 and assigning it to the object my_table. This involves selecting the columns cylinder and displacement from mtcars data set. Then a new column is created for Table 1 with the name disp_m representing displacement mean.
 ```{r}
@@ -38,6 +39,7 @@ my_table <- mtcars |>
             .by=cyl)
 ```
 
+
 Formatting my_table to match the lab instructions. Changing the names of the columns in Table 1 and using kable to style it correctly.
 ```{r}
 my_table <- my_table |>
@@ -46,7 +48,27 @@ my_table <- my_table |>
 
 
 knitr::kable(my_table, caption = 
-               "Table 1: Mean engine displacement by number of cylinders") |>
+               "Mean engine displacement by number of cylinders") |>
   kableExtra::kable_styling(full_width = FALSE)
 
 ```
+
+
+Creating and formatting the Bar Chart to align with the lab instructions. 
+```{r}
+my_table |>
+  ggplot(aes(x = Cylinders, y = Displacement)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Figure 1. Mean engine displacement by number of cylinders",
+       x = "Number of Cylinders", 
+       y = "Engine Displacement (cm^3)") +
+  theme_bw() +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),              # Remove full panel border
+    axis.line = element_line(color = "black")
+  )
+```
+
+Figure 1 shows that as cylinders increase, engine displacement also increases. This shows that Big Dawgs original statement is false and cars with more cylinders do have bigger engines.
