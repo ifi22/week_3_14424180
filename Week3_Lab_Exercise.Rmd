@@ -6,3 +6,35 @@ output:
   pdf_document: default
 ---
 
+#Comparison of Cylindar Count to Engine Displacement
+
+A client named Big Dawg has commissioned this work with the research question: 
+Do cars with more cylinders not have bigger engines?
+
+The goal of this report is to provide Big Dawg with clarity as to if cars with 
+more cylinders have bigger or not.
+
+This report will investigate the relationship between engine displacement and 
+number of cylinders by using linear regression and the tools available on 
+R studio.
+
+
+
+```{r} 
+library(tidyverse)
+mtcars <- mtcars
+
+my_table <- mtcars |>
+  select(cyl, disp) |>
+  summarise(disp_m = round(mean(disp), 2), 
+            .by=cyl)
+
+my_table <- my_table |>
+  rename(Cylinders = cyl, 
+         Displacement = disp_m)
+
+knitr::kable(my_table, caption = 
+               "Table 1: Mean engine displacement by number of cylinders") |>
+  kableExtra::kable_styling(full_width = FALSE)
+
+```
