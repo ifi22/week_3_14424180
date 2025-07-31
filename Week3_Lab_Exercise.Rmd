@@ -1,0 +1,8 @@
+---
+title: "Week3_Lab_Exercise"
+author: "Isla Fisher"
+date: "31/07/2025"
+output:
+  pdf_document: default
+---
+
