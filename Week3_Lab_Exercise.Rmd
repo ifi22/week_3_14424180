@@ -3,7 +3,8 @@ title: "Week3_Lab_Exercise"
 author: "Isla Fisher"
 date: "31/07/2025"
 output:
-  pdf_document: default
+  html_document:
+    df_print: paged
 ---
 
 #Comparison of Cylindar Count to Engine Displacement
@@ -19,19 +20,30 @@ number of cylinders by using linear regression and the tools available on
 R studio.
 
 
-
+Calling the tidyverse package.
 ```{r} 
 library(tidyverse)
-mtcars <- mtcars
+```
 
+Calling mtcars and assigning it to the object mtcars.
+```{r}
+mtcars <- mtcars
+```
+
+Creating Table 1 and assigning it to the object my_table. This involves selecting the columns cylinder and displacement from mtcars data set. Then a new column is created for Table 1 with the name disp_m representing displacement mean.
+```{r}
 my_table <- mtcars |>
   select(cyl, disp) |>
   summarise(disp_m = round(mean(disp), 2), 
             .by=cyl)
+```
 
+Formatting my_table to match the lab instructions. Changing the names of the columns in Table 1 and using kable to style it correctly.
+```{r}
 my_table <- my_table |>
   rename(Cylinders = cyl, 
          Displacement = disp_m)
+
 
 knitr::kable(my_table, caption = 
                "Table 1: Mean engine displacement by number of cylinders") |>
