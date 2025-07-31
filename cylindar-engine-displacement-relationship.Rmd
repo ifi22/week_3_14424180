@@ -1,0 +1,89 @@
+---
+title: "Comparison of Cylindar Count to Engine Displacement"
+author: "Isla Fisher"
+date: "31/07/2025"
+output: pdf_document
+---
+
+A client named Big Dawg has commissioned this work with the research question: 
+Do cars with more cylinders not have bigger engines?
+
+The goal of this report is to provide Big Dawg with clarity as to if cars with 
+more cylinders have bigger or not.
+
+This report will investigate the relationship between engine displacement and 
+number of cylinders by using linear regression and the tools available on 
+R studio.
+
+
+```{=latex}
+\vspace{2cm}
+```
+
+
+## Creating a Cylinder and Engine Displacement Table
+
+```{r} 
+# Calling the tidyverse package.
+library(tidyverse)
+```
+
+
+```{r}
+# Calling mtcars and assigning it to the object mtcars.
+mtcars <- mtcars
+```
+
+
+```{r}
+# Creating Table 1 and assigning it to the object my_table. This involves 
+# selecting the columns cylinder and displacement from mtcars data set. Then a 
+# new column is created for Table 1 with the name disp_m representing 
+# displacement mean.
+
+my_table <- mtcars |>
+  select(cyl, disp) |>
+  summarise(disp_m = round(mean(disp), 2), 
+            .by=cyl)
+```
+
+
+```{r}
+# Formatting my_table to match the lab instructions. Changing the names of the 
+# columns in Table 1 and using kable to style it correctly.
+my_table <- my_table |>
+  rename(Cylinders = cyl, 
+         Displacement = disp_m)
+
+
+knitr::kable(my_table, align = 'c', caption = 
+               "Mean engine displacement by number of cylinders") |>
+  kableExtra::kable_styling(full_width = FALSE, position = "center")
+
+```
+
+
+```{=latex}
+\vspace{2cm}
+```
+
+## Creating a Cylinder and Engine Displacement Bar Chart
+
+```{r}
+# Creating and formatting the Bar Chart to align with the lab instructions.
+my_table |>
+  ggplot(aes(x = Cylinders, y = Displacement)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Figure 1. Mean engine displacement by number of cylinders",
+       x = "Number of Cylinders", 
+       y = "Engine Displacement (cm^3)") +
+  theme_bw() +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),              # Remove full panel border
+    axis.line = element_line(color = "black")
+  )
+```
+
+Figure 1 shows that as cylinders increase, engine displacement also increases. This shows that Big Dawgs original statement is false and cars with more cylinders do have bigger engines.
