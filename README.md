@@ -1,2 +1,2 @@
 # week_3_14424180
-Introduction to Git and GitHub for Data201 Week 3.
+Data201 Week 3: Introduction to Git and GitHub
